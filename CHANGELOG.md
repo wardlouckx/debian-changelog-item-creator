@@ -1,4 +1,4 @@
-## [1.0.7] - 2025-06-23
+## [0.1.7] - 2025-06-23
 ### Fixed
 - Fixed an issue where no changelog item could be made when the urgency of the previous item was anything other than "low"
 
