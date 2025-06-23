@@ -4,6 +4,8 @@ const vscode = require("vscode");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+	const debianChangelogLineRegex = /^(.*?) \((.*?)\) (.*?); urgency=(.*?)$/
+
 	const editEmailAddress = vscode.commands.registerCommand(
 		"debian-changelog-item-creator.editEmailAddress",
 		async () => {
@@ -59,7 +61,7 @@ function activate(context) {
 					return;
 				}
 
-				const { title, version, distribution } = parseChangelogLine(changelogLine);
+				const { title, version, distribution, urgency } = parseChangelogLine(changelogLine);
 				const newVersion = bumpVersion(version);
 				let changelogMessage = "";
 
@@ -133,7 +135,7 @@ function activate(context) {
 				const currentDate = new Date();
 				const formattedDate = formatDate(currentDate);
 
-				const template = `${title} (${newVersion}) ${distribution}; urgency=low\n\n    * Release ${newVersion}\n\n${formattedChangelogMessage}\n\n    -- ${name} <${email}> ${formattedDate}`; // Using normal spaces instead of tabs to prevent issues with syntax highlighting and positioning
+				const template = `${title} (${newVersion}) ${distribution}; urgency=${urgency}\n\n    * Release ${newVersion}\n\n${formattedChangelogMessage}\n\n    -- ${name} <${email}> ${formattedDate}`; // Using normal spaces instead of tabs to prevent issues with syntax highlighting and positioning
 
 				await editor.edit((editBuilder) => {
 					editBuilder.insert(editor.selection.active, template);
@@ -198,7 +200,7 @@ function activate(context) {
 				let startLine = cursorPosition.line;
 				while (
 					startLine >= 0 &&
-					!document.lineAt(startLine).text.match(/^(.*?) \((.*?)\) (.*?); urgency=low$/)
+					!document.lineAt(startLine).text.match(debianChangelogLineRegex)
 				) {
 					startLine--;
 				}
@@ -399,14 +401,14 @@ function activate(context) {
 	}
 
 	function parseChangelogLine(line) {
-		const regex = /^(.*?) \((.*?)\) (.*?); urgency=low$/;
-		const match = line.match(regex);
+		const match = line.match(debianChangelogLineRegex);
 
 		if (match) {
 			return {
 				title: match[1],
 				version: match[2],
 				distribution: match[3],
+				urgency: match[4],
 			};
 		}
 
@@ -414,6 +416,7 @@ function activate(context) {
 			title: "",
 			version: "",
 			distribution: "stable", // Default to "stable" if not found
+			urgency: "low", // Default to "low" if not found
 		};
 	}
 
@@ -423,7 +426,7 @@ function activate(context) {
 
 		for (let i = cursorPosition; i < document.lineCount; i++) {
 			const lineText = document.lineAt(i).text;
-			if (lineText.match(/^(.*?) \((.*?)\) (.*?); urgency=low$/)) {
+			if (lineText.match(debianChangelogLineRegex)) {
 				return lineText;
 			}
 		}

@@ -3,7 +3,7 @@
 	"displayName": "Debian Changelog Item Creator",
 	"description": "Add a generated Debian changelog item",
 	"publisher": "DarkPhoenix",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"engines": {
 		"vscode": "^1.89.0"
 	},

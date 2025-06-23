@@ -1,3 +1,7 @@
+## [1.0.7] - 2025-06-23
+### Fixed
+- Fixed an issue where no changelog item could be made when the urgency of the previous item was anything other than "low"
+
 ## [0.1.6] - 2024-09-08
 ### Added
 - Changelog text with multiple indentation levels are now supported by pressing Tab when on a line with only a -
