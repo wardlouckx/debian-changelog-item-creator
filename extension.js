@@ -55,10 +55,9 @@ function activate(context) {
 			if (editor) {
 				const changelogLine = findChangelogLine(editor);
 				if (!changelogLine) {
-					vscode.window.showErrorMessage(
-						"Debian Changelog Item Creator: No changelog line found below the cursor.",
+					vscode.window.showWarningMessage(
+						"Debian Changelog Item Creator: No changelog line found below the cursor. Added a default changelog item instead.",
 					);
-					return;
 				}
 
 				const { title, version, distribution, urgency } = parseChangelogLine(changelogLine);
@@ -413,8 +412,8 @@ function activate(context) {
 		}
 
 		return {
-			title: "",
-			version: "",
+			title: "projectName",
+			version: "0.0.0",
 			distribution: "stable", // Default to "stable" if not found
 			urgency: "low", // Default to "low" if not found
 		};
@@ -431,7 +430,7 @@ function activate(context) {
 			}
 		}
 
-		return null;
+		return "";
 	}
 
 	function bumpVersion(version) {

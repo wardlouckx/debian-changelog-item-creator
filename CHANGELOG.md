@@ -1,3 +1,7 @@
+## [0.2.0] - 2025-06-23
+### Added
+- Added a default changelog item which is used when it can't find a previous changelog item below the cursor
+
 ## [0.1.7] - 2025-06-23
 ### Fixed
 - Fixed an issue where no changelog item could be made when the urgency of the previous item was anything other than "low"
