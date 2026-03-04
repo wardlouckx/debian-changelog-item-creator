@@ -1,9 +1,9 @@
 {
 	"name": "debian-changelog-item-creator",
-	"displayName": "Debian Changelog Item Creator",
-	"description": "Add a generated Debian changelog item",
-	"publisher": "DarkPhoenix",
-	"version": "0.2.0",
+	"displayName": "Debian Changelog Item Creator - Alternate format",
+	"description": "Add a generated Debian changelog item - Forked version with personal format",
+	"publisher": "Ward Louckx",
+	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.89.0"
 	},
@@ -11,7 +11,7 @@
 	"main": "./extension.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/0DarkPhoenix/debian-changelog-item-creator.git"
+		"url": "https://github.com/wardlouckx/debian-changelog-item-creator.git"
 	},
 	"activationEvents": ["onStartupFinished"],
 	"contributes": {
