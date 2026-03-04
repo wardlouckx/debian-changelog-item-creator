@@ -134,7 +134,7 @@ function activate(context) {
 				const currentDate = new Date();
 				const formattedDate = formatDate(currentDate);
 
-				const template = `${title} (${newVersion}) ${distribution}; urgency=${urgency}\n\n    * Release ${newVersion}\n\n${formattedChangelogMessage}\n\n    -- ${name} <${email}> ${formattedDate}`; // Using normal spaces instead of tabs to prevent issues with syntax highlighting and positioning
+				const template = `${title} (${newVersion}) ${distribution}; urgency=${urgency}\n\n  * Change: \n\n -- ${name} <${email}> ${formattedDate}`; // Using normal spaces instead of tabs to prevent issues with syntax highlighting and positioning
 
 				await editor.edit((editBuilder) => {
 					editBuilder.insert(editor.selection.active, template);
