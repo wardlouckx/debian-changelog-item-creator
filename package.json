@@ -2,8 +2,8 @@
 	"name": "debian-changelog-item-creator",
 	"displayName": "Debian Changelog Item Creator - Alternate format",
 	"description": "Add a generated Debian changelog item - Forked version with personal format",
-	"publisher": "Ward Louckx",
-	"version": "0.0.1",
+	"publisher": "ward-louckx",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.89.0"
 	},
